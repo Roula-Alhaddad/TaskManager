@@ -1,0 +1,69 @@
+﻿@model IEnumerable<TaskManager.Models.Assignment>
+
+@{
+    ViewBag.Title = "index";
+}
+
+<h2>index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Consultant.Consultant_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Assignment_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Client)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Percentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Start_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.End_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Consultant.Consultant_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Assignment_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Client)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Percentage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Start_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.End_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Assignment_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Assignment_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Assignment_Id })
+        </td>
+    </tr>
+}
+
+</table>

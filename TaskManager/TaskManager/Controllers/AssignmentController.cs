@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TaskManager.Models;
+using TaskManager.Context;
 
 namespace TaskManager.Controllers
 {
     public class AssignmentController : Controller
     {
+        private Assignmentcontext db = new Assignmentcontext();
         // GET: Assignment
-        public ActionResult Index()
+        public ActionResult index()
         {
-            return View();
+            var result = db.Assignments.ToList();
+            //return Json(result, JsonRequestBehavior.AllowGet);
+            return View(result);
         }
 
         // GET: Assignment/Details/5
