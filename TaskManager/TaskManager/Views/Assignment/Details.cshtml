@@ -1,0 +1,74 @@
+﻿@model TaskManager.Models.Assignment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Assignment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Consultant.Consultant_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Consultant.Consultant_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Assignment_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Assignment_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Percentage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Percentage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.End_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.End_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Assignment_Id }) |
+    @Html.ActionLink("Back to List", "index")
+</p>

@@ -30,6 +30,10 @@ namespace TaskManager
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                         "~/Scripts/angular.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                       "~/Scripts/app.js"));
+           
+
         }
     }
 }

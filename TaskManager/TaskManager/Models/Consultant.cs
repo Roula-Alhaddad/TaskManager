@@ -12,6 +12,6 @@ namespace TaskManager.Models
         public int Consultant_Id { get; set; }
         public string Consultant_Name { get; set; }
 
-        public virtual List<Assignment> Assignments { get; set; }
+        public virtual ICollection<Assignment> Assignments { get; set; }
     }
 }

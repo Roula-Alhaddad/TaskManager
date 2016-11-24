@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using TaskManager.Models;
 using TaskManager.Context;
+using Newtonsoft.Json;
+using System.IO;
+using System.Net;
 
 namespace TaskManager.Controllers
 {
@@ -15,16 +18,24 @@ namespace TaskManager.Controllers
         public ActionResult index()
         {
             var result = db.Assignments.ToList();
-            //return Json(result, JsonRequestBehavior.AllowGet);
-            return View(result);
+            //return Json(result, JsonRequestBehavior.AllowGet);  
+            return View(result);                   
         }
 
         // GET: Assignment/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Assignment Assignment = db.Assignments.Find(id);
+            if (Assignment == null)
+            {
+                return HttpNotFound();
+            }
+            return View(Assignment);
         }
-
         // GET: Assignment/Create
         public ActionResult Create()
         {
