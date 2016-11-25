@@ -8,6 +8,7 @@ using TaskManager.Context;
 using Newtonsoft.Json;
 using System.IO;
 using System.Net;
+using System.Data.Entity;
 
 namespace TaskManager.Controllers
 {
@@ -44,46 +45,77 @@ namespace TaskManager.Controllers
 
         // POST: Assignment/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create([Bind(Include = "Assignment_Id,Assignment_Name")] Assignment Assignment)
         {
             try
             {
                 // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Assignments.Add(Assignment);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(Assignment);
             }
             catch
             {
-                return View();
+                return View(Assignment);
             }
         }
 
         // GET: Assignment/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Assignment Assignment = db.Assignments.Find(id);
+            if (Assignment == null)
+            {
+                return HttpNotFound();
+            }
+            return View(Assignment);           
         }
 
         // POST: Assignment/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Assignment_Id,Assignment_Name")] Assignment Assignment)
         {
             try
             {
                 // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(Assignment).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(Assignment);
             }
             catch
             {
-                return View();
-            }
+                return View(Assignment);
+            }                                   
         }
 
         // GET: Assignment/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Assignment Assignment = db.Assignments.Find(id);
+            if (Assignment == null)
+            {
+                return HttpNotFound();
+            }
+            return View(Assignment);
+
         }
 
         // POST: Assignment/Delete/5
@@ -93,7 +125,9 @@ namespace TaskManager.Controllers
             try
             {
                 // TODO: Add delete logic here
-
+                Assignment Assignment = db.Assignments.Find(id);
+                db.Assignments.Remove(Assignment);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch

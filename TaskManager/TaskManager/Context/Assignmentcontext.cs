@@ -12,8 +12,8 @@ namespace TaskManager.Context
     {
         public Assignmentcontext() : base("Assignmentcontext")
         {
-            Database.SetInitializer<Assignmentcontext>(new CreateDatabaseIfNotExists<Assignmentcontext>());
-            this.Configuration.LazyLoadingEnabled = false;
+            //Database.SetInitializer<Assignmentcontext>(new CreateDatabaseIfNotExists<Assignmentcontext>());
+            //this.Configuration.LazyLoadingEnabled = false;
         }
         public DbSet<Consultant> Consultants { get; set; }
         public DbSet<Assignment> Assignments { get; set; }
